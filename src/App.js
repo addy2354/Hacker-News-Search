@@ -115,6 +115,9 @@ function App() {
           </>
         )}
       </section>
+      <footer className="footer">
+        <h6>Made by Adeel Javed</h6>
+      </footer>
     </>
   );
 }
