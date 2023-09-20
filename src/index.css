@@ -79,7 +79,7 @@ button:hover {
     transform: rotate(0deg);
   }
   to {
-    transform: rotate(3600deg);
+    transform: rotate(360deg);
   }
 }
 
@@ -169,6 +169,20 @@ button:hover {
 
 .section .cards div p {
   color: slategray;
+}
+
+footer h6 {
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 1rem;
+  color: slateblue;
+  font-weight: bolder;
+  transition: all 0.3s ease-in-out;
+}
+
+footer h6:hover {
+  transform: scale(1.25);
+  transition: all 0.3s ease-in-out;
 }
 
 @media (min-width: 760px) {
