@@ -36,7 +36,7 @@ input {
   padding: 1.25rem 1rem;
   color: slateblue;
   border: 0.1rem solid slateblue;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   border-radius: 0.625rem;
   transition: all 0.15s ease-in-out;
 }
@@ -131,6 +131,16 @@ button:hover {
   background-color: #161f34;
   padding: 1rem;
   border-radius: 0.625rem;
+  transition: all 0.3s ease-in-out
+}
+
+.section .cards div:hover {
+  background-color: #30436f;
+  padding: 1rem;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transform: scale(1.02);
+  transition: all 0.3s ease-in-out;
 }
 
 .section .cards div h2 {
