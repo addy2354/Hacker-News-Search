@@ -1,40 +1,55 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-// import format from "date-fns/format"
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [items, setItems] = useState([]);
-  const [query, setQuery] = useState("programming");
   const [text, setText] = useState("");
-  const [largeTitle, setLargeTitle] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [largeTitle, setLargeTitle] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setIsLoading(true);
+    if (text || text === "") {
+      // Use the default query ("programming") if text is empty
+      const query = text || "programming";
 
-    const fetchArticles = async () => {
+      const delayTimer = setTimeout(() => {
+        fetchArticles(query);
+      }, 0); // Adjust the delay time as needed
+
+      return () => clearTimeout(delayTimer);
+    }
+  }, [text]);
+
+  const fetchArticles = async (query) => {
+    setIsLoading(true);
+    try {
       const res = await fetch(
         `https://hn.algolia.com/api/v1/search?query=${query}`
       );
       const data = await res.json();
       setItems(data.hits);
       setLargeTitle(data.hits[0]);
-    };
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error("Error fetching articles:", error);
+    }
+  };
 
-    fetchArticles();
-    setIsLoading(false);
-  }, [query]);
+  const handleCardClick = (url) => {
+    window.open(url, "_blank");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!text) {
-      toast("Input is empty!");
+      // Use the default query ("programming") if input is empty
+      fetchArticles("programming");
     } else {
-      setQuery(text);
-      setText("");
+      fetchArticles(text);
     }
   };
 
@@ -50,10 +65,10 @@ function App() {
             onChange={(e) => setText(e.target.value)}
             placeholder="Search for something"
           />
-          <button>Search</button>
+          {/* You can remove the Search button */}
         </form>
 
-        <ToastContainer
+        {/* <ToastContainer
           position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
@@ -64,7 +79,7 @@ function App() {
           draggable
           pauseOnHover
           theme="dark"
-        />
+        /> */}
 
         {isLoading ? (
           <div className="spinner"></div>
@@ -78,31 +93,20 @@ function App() {
             </article>
 
             <p className="category">
-              Category: <span>{query}</span>
+              Category: <span>{text || "programming"}</span>
             </p>
 
             <article className="cards">
-              {/* <div>
-              <h2>Heading 2</h2>
-
-                <ul>
-                  <li>By Adeel</li>
-                  <li>
-                    <a href="">Read Full Article</a></li>
-                </ul>
-
-                <p>Date</p>
-            </div> */}
-              {items.map(({ author, created_at, title, url, objectId }) => (
-                <div key={objectId}>
+              {items.map(({ author, created_at, title, url, objectID }) => (
+                <div
+                  key={objectID}
+                  onClick={() => handleCardClick(url)}
+                  className="card"
+                >
                   <h2>{title}</h2>
                   <ul>
                     <li>By {author}</li>
-                    <li>
-                      <a href={url} target="_blank" rel="noreferrer">
-                        Read Full Article
-                      </a>
-                    </li>
+                    {/* <li>Read Full Article</li> */}
                   </ul>
                   <p>{format(new Date(created_at), "dd MMMM yyyy")}</p>
                 </div>
