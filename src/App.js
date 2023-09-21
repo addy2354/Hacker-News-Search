@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
-// import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -11,12 +9,11 @@ function App() {
 
   useEffect(() => {
     if (text || text === "") {
-      // Use the default query ("programming") if text is empty
       const query = text || "programming";
 
       const delayTimer = setTimeout(() => {
         fetchArticles(query);
-      }, 0); // Adjust the delay time as needed
+      }, 0); // delay-time
 
       return () => clearTimeout(delayTimer);
     }
@@ -46,7 +43,6 @@ function App() {
     e.preventDefault();
 
     if (!text) {
-      // Use the default query ("programming") if input is empty
       fetchArticles("programming");
     } else {
       fetchArticles(text);
@@ -65,21 +61,7 @@ function App() {
             onChange={(e) => setText(e.target.value)}
             placeholder="Search for something"
           />
-          {/* You can remove the Search button */}
         </form>
-
-        {/* <ToastContainer
-          position="bottom-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="dark"
-        /> */}
 
         {isLoading ? (
           <div className="spinner"></div>
@@ -106,7 +88,6 @@ function App() {
                   <h2>{title}</h2>
                   <ul>
                     <li>By {author}</li>
-                    {/* <li>Read Full Article</li> */}
                   </ul>
                   <p>{format(new Date(created_at), "dd MMMM yyyy")}</p>
                 </div>
