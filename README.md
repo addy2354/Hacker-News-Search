@@ -1,4 +1,4 @@
-# Live Project - https://adeels-hacker-news-app.netlify.app
+# Live Project - <a href="https://adeels-hacker-news-app.netlify.app" target="_blank">hacker-news-app</a>
 
 # Getting Started with Create React App
 
