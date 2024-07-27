@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (text || text === "") {
-      const query = text || "Hacker";
+      const query = text || "Software";
 
       const delayTimer = setTimeout(() => {
         fetchArticles(query);
@@ -44,7 +44,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchArticles(text || "Hacker");
+    fetchArticles(text || "Software");
   };
 
   return (
@@ -73,7 +73,7 @@ function App() {
             </article>
 
             <p className="category">
-              Category: <span>{text || "Hacker"}</span>
+              Category: <span>{text || "Software"}</span>
             </p>
 
             <article className="cards">
