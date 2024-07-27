@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     if (text || text === "") {
-      const query = text || "programming";
+      const query = text || "Hacker";
 
       const delayTimer = setTimeout(() => {
         fetchArticles(query);
@@ -26,8 +26,9 @@ function App() {
         `https://hn.algolia.com/api/v1/search?query=${query}`
       );
       const data = await res.json();
-      setItems(data.hits);
-      setLargeTitle(data.hits[0]);
+      const validItems = data.hits.filter(item => item.url);
+      setItems(validItems);
+      setLargeTitle(validItems[0] || {});
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -36,17 +37,14 @@ function App() {
   };
 
   const handleCardClick = (url) => {
-    window.open(url, "_blank");
+    if (url) {
+      window.open(url, "_blank");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!text) {
-      fetchArticles("programming");
-    } else {
-      fetchArticles(text);
-    }
+    fetchArticles(text || "Hacker");
   };
 
   return (
@@ -75,11 +73,11 @@ function App() {
             </article>
 
             <p className="category">
-              Category: <span>{text || "programming"}</span>
+              Category: <span>{text || "Hacker"}</span>
             </p>
 
             <article className="cards">
-              {items.map(({ author, created_at, title, url, objectID }) => (
+              {items.slice(1).map(({ author, created_at, title, url, objectID }) => (
                 <div
                   key={objectID}
                   onClick={() => handleCardClick(url)}
@@ -97,7 +95,9 @@ function App() {
         )}
       </section>
       <footer className="footer">
-        <h6>Made by Adeel Javed</h6>
+        <a href="https://github.com/adeel-015/" target="_blank" rel="noreferrer">
+          <h6>Made by Adeel Javed</h6>
+        </a>
       </footer>
     </>
   );

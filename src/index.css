@@ -28,6 +28,7 @@ form {
 }
 
 input {
+  width: -webkit-fill-available;
   font-family: inherit;
   font-size: 1.5rem;
   outline: none;
@@ -171,19 +172,33 @@ button:hover {
   color: slategray;
 }
 
+/* Footer styles */
+footer {
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  padding: 10px; /* Add some padding to the footer */
+}
+
+/* h6 styles */
 footer h6 {
+  display: inline-block; /* Ensure the border wraps tightly around the text */
   text-align: center;
   padding: 10px;
-  margin-bottom: 1rem;
-  color: slateblue;
+  margin: 0; /* Remove default margin */
+  color: darkslateblue;
   font-weight: bolder;
-  transition: all 0.3s ease-in-out;
+  border: 2px solid transparent; /* Set initial border to transparent */
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transition for color, border color, and scaling */
 }
 
 footer h6:hover {
-  transform: scale(1.25);
-  transition: all 0.3s ease-in-out;
+  color: slateblue; /* Change text color on hover */
+  border-color: slateblue; /* Change border color on hover */
+  transform: scale(1.25); /* Scale up the text on hover */
+  cursor: pointer;
 }
+
 
 @media (min-width: 760px) {
   .section .cards {
