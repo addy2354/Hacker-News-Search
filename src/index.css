@@ -37,7 +37,6 @@ input {
   padding: 1.25rem 1rem;
   color: slateblue;
   border: 0.1rem solid slateblue;
-  /* margin-right: 1rem; */
   border-radius: 0.625rem;
   transition: all 0.15s ease-in-out;
 }
