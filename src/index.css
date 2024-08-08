@@ -45,6 +45,26 @@ input::placeholder {
   color: slategray;
 }
 
+.search-form {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-clear-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+}
+
 button {
   font-family: inherit;
   font-size: 1.5rem;
@@ -203,6 +223,10 @@ footer h6:hover {
   .section .cards {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .search-clear-icon {
+    right: 10px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -227,5 +251,9 @@ footer h6:hover {
   .section {
     max-width: 992px;
     margin: auto;
+  }
+
+  .search-clear-icon {
+    right: 19px;
   }
 }

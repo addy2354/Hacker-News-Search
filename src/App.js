@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import ClearIcon from '@mui/icons-material/Clear';
 
 function App() {
   const [items, setItems] = useState([]);
@@ -47,18 +48,28 @@ function App() {
     fetchArticles(text || "Software");
   };
 
+  const handleClearSearch = () => {
+    setText("");
+    fetchArticles("Software"); // Fetch default articles when search is cleared
+  };
+
   return (
     <>
       <section className="section">
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="Search"
-            id="search"
-            value={text}
-            onChange={(e) => setText(e.target.value)}
-            placeholder="Search for something"
-          />
+        <form autoComplete="off" onSubmit={handleSubmit} className="search-form">
+          <div className="search-container">
+            <input
+              type="text"
+              name="Search"
+              id="search"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Search for something"
+            />
+            {text && (
+              <ClearIcon className="search-clear-icon" onClick={handleClearSearch} fontSize="large" />
+            )}
+          </div>
         </form>
 
         {isLoading ? (
